@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Getting Started With JavaScript Modules</title>
+    
+    <link href="stylesheets/all.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/all.js" type="text/javascript"></script>
+  </head>
+  
+  <body class="index">
+    <div class="logo">
+      <p>JavaScript Modules</p>
+    </div>
+
+    <main>
+      <p>The next version of JavaScript comes with a module system heavily
+inspired by Node.js modules.<br>Here&rsquo;s how it works.</p>
+
+<h1>Creating a Module</h1>
+
+<p>We&rsquo;re going to build a simple <code>asap</code> module, which lets you schedule some
+work to happen as soon as possible, but asynchronously. In Node.js, you
+can do this via <code>process.nextTick</code>, but there are different approaches
+that work in various browsers. We&rsquo;re going to build a module that works
+everywhere.</p>
+
+<p>We start by creating a new file for this module. We&rsquo;ll call it <code>asap.js</code>.
+The module provides a single primary function, which JavaScript calls
+the <em>default export</em>. You export a default value from a module by using
+<code>export default</code>.</p>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">asap</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isNode</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">!==</span> <span class="s2">"undefined"</span> <span class="o">&amp;&amp;</span>
+             <span class="p">{}.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">process</span><span class="p">)</span> <span class="o">===</span> <span class="s2">"[object process]"</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">isNode</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">setImmediate</span> <span class="o">!==</span> <span class="s2">"undefined"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">setImmediate</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">asap</span><span class="p">;</span>
+</code></pre>
+
+<h1>Importing a module</h1>
+
+<p>To import <code>asap</code> in another module, we use the import syntax:</p>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+
+<span class="nx">asap</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"hello async world!"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>This syntax takes the default function exported from <code>asap</code> and stores it
+in the variable <code>asap</code>, which we can then use to call it.</p>
+
+<h1>Named exports</h1>
+
+<p>Sometimes modules need multiple exports, which their consumers can refer
+to individually by name.</p>
+
+<p>For example, jQuery has a single primary export, (the <code>jQuery</code>
+function), and several additional named exports (<code>ajax</code>, <code>getJSON</code>,
+<code>animate</code>, etc.).  In Node.js, the <code>mkdirp</code> module has a single default
+export, which recursively creates a directory, and a named export called
+<code>sync</code>, which does the same thing, but synchronously.</p>
+
+<p>In our case, in addition to the default export, the <code>asap</code> module might
+wish to provide a <code>later</code> function, which schedules a function to run
+later, after other network or UI work has a chance to occur.</p>
+
+<p>Our module looks the same as before, except we add a new export
+declaration.</p>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">asap</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isNode</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">process</span> <span class="o">!==</span> <span class="s2">"undefined"</span> <span class="o">&amp;&amp;</span>
+             <span class="p">{}.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">process</span><span class="p">)</span> <span class="o">===</span> <span class="s2">"[object process]"</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">isNode</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">nextTick</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">setImmediate</span> <span class="o">!==</span> <span class="s2">"undefined"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">setImmediate</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">asap</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">asap</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">later</span> <span class="o">=</span> <span class="nx">isNode</span> <span class="p">?</span> <span class="nx">process</span><span class="p">.</span><span class="nx">setImmediate</span> <span class="p">:</span> <span class="nx">asap</span><span class="p">;</span>
+</code></pre>
+
+<h1>Named imports</h1>
+
+<p>Now that we&rsquo;ve exported <code>later</code>, we can import it in another module.</p>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+
+<span class="nx">later</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Running after other network events"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>For the curious, you can import both the default export and a number of
+named exports in the same <code>import</code>:</p>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span><span class="p">,</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+</code></pre>
+
+<p>And that&rsquo;s all there is to it!</p>
+
+<h1>Conveniences</h1>
+
+<h2>Renaming named imports</h2>
+
+<p>Sometimes when importing a named export, you want to give it its own
+local name.</p>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">unlink</span> <span class="nx">as</span> <span class="nx">rm</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+<span class="nx">rm</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* check errors */</span> <span class="p">});</span>
+</code></pre>
+
+<h2>Importing into a namespace</h2>
+
+<p>It can be convenient to import all of a module&rsquo;s named exports into a
+single local namespace.</p>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">fs</span> <span class="nx">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">unlink</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* check errors */</span> <span class="p">});</span>
+</code></pre>
+
+<h2>Shorter named exports</h2>
+
+<p>You can make any declaration in JavaScript (like <code>var</code> or <code>function</code>)
+a named export by prefixing it with export.</p>
+<pre><code class="highlight javascript"><span class="c1">// exports this function as "requestAnimationFrame"
+</span><span class="kr">export</span> <span class="kd">function</span> <span class="nx">requestAnimationFrame</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// cross-browser requestAnimationFrame
+</span><span class="p">}</span>
+
+<span class="c1">// exports document.location as "location"
+</span><span class="kr">export</span> <span class="kd">var</span> <span class="nx">location</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">;</span> 
+</code></pre>
+
+<p>This also works with new declarations, like <code>class</code> and <code>let</code>.</p>
+<pre><code class="highlight javascript"><span class="c1">// exports this class as "File"
+</span><span class="kr">export</span> <span class="kr">class</span> <span class="nx">File</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* implementation */</span> <span class="p">}</span>
+
+<span class="c1">// exports "0.6.3" as "VERSION"
+</span><span class="kr">export</span> <span class="kd">let</span> <span class="nx">VERSION</span> <span class="o">=</span> <span class="s2">"0.6.3"</span><span class="p">;</span>
+</code></pre>
+
+<p>These names are also available in the module&rsquo;s local scope, so you can
+use them in other functions.</p>
+
+<h2>Grouping named exports</h2>
+
+<p>You can export any number of local variables together.</p>
+<pre><code class="highlight javascript"><span class="kr">export</span> <span class="p">{</span> <span class="nx">getJSON</span><span class="p">,</span> <span class="nx">postJSON</span><span class="p">,</span> <span class="nx">animate</span> <span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">getJSON</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// implementation
+</span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">postJSON</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// implementation
+</span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">animate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// implementation
+</span><span class="p">}</span>
+</code></pre>
+
+<p>You can put the grouped export declaration anywhere in the file, so you
+can define your imports and exports next to each other at the top of
+your modules if you wish.</p>
+
+<h1>Features</h1>
+
+<p>JavaScript modules have a number of nice features that make important
+use cases smooth and seamless, including refactoring and tooling.</p>
+
+<ol>
+<li>JavaScript modules support late bound cycles between modules for both
+the default export and named exports. It just works.</li>
+<li>JavaScript modules separate the names that exist on the default
+export (and their prototype chains) and other named exports, avoiding
+collisions.</li>
+<li>JavaScript modules make it easy to determine exactly what you are
+importing by just looking at the syntax. That improves error
+messages, but also makes it easier to build tools like browserify and
+JSHint that work reliably without caveats.</li>
+</ol>
+
+
+      <footer>
+        <a href="cjs.html">Porting from CommonJS</a> |
+        <a href="amd.html">Porting from AMD</a>
+      </footer>
+    </main>
+
+  </body>
+</html>
