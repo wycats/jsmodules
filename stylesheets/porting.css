@@ -1,0 +1,50 @@
+/* line 3, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+.cjs main content {
+  display: flex;
+  flex-flow: row wrap; }
+  /* line 7, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content p {
+    margin: 0; }
+  /* line 11, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content p:first-child {
+    width: 93%;
+    padding-bottom: 5px;
+    margin-bottom: 20px; }
+  /* line 17, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content h1 {
+    margin: 0;
+    margin-right: 1%;
+    width: 49%;
+    border-bottom: 1px solid #b25600; }
+  /* line 24, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content h1 + h1 {
+    margin-right: 0;
+    margin-left: 1%; }
+  /* line 29, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content h2 {
+    color: #ff891d;
+    font-family: Consolas;
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 20px; }
+  /* line 37, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content a {
+    color: #37d7ff; }
+  /* line 41, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content pre {
+    font-size: 13px;
+    width: 49%; }
+  /* line 46, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content pre:nth-of-type(odd) {
+    margin-right: 1%; }
+  /* line 50, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content pre:nth-of-type(even) {
+    margin-left: 1%; }
+  /* line 54, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content .c1 {
+    color: #ccc; }
+  /* line 58, /home/wycats/Code/modules-website/source/stylesheets/porting.css.scss */
+  .cjs main content p strong {
+    display: block;
+    font-weight: normal;
+    padding-bottom: 20px; }

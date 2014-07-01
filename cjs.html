@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Porting from CommonJS</title>
+    
+    <link href="stylesheets/all.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/all.js" type="text/javascript"></script>
+  </head>
+  
+  <body class="cjs">
+    <div class="logo">
+      <p>JavaScript Modules</p>
+    </div>
+
+    <main>
+      <content>
+        <p>Here are some example Node.js modules, and how they look in
+JavaScript Next.</p>
+
+<h1>CommonJS</h1>
+
+<h1>JavaScript Next</h1>
+
+<h2>body-parser.js</h2>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">bytes</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"bytes"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">iconv</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"iconv-lite"</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="kd">function</span> <span class="nx">getDecoder</span><span class="p">(</span><span class="nx">encoding</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">encoding</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">iconv</span><span class="p">.</span><span class="nx">getCodec</span><span class="p">(</span><span class="nx">encoding</span><span class="p">).</span><span class="nx">decoder</span><span class="p">()</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ...
+</span></code></pre>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">bytes</span> <span class="kr">from</span> <span class="s2">"bytes"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">getCodec</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"iconv-lite"</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="kd">function</span> <span class="nx">getDecoder</span> <span class="p">(</span><span class="nx">encoding</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">encoding</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">getCodec</span><span class="p">(</span><span class="nx">encoding</span><span class="p">).</span><span class="nx">decoder</span><span class="p">()</span>
+  <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// ...
+</span></code></pre>
+
+<p><a href="https://gist.github.com/wycats/95e2cfdfefa98f006318/revisions">full diff</a></p>
+
+<h2>request.js</h2>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">cookies</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./lib/cookies'</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">copy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./lib/copy'</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">Request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./request'</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'util'</span><span class="p">)</span>
+  <span class="p">;</span>
+
+<span class="c1">// ...
+</span>
+<span class="kd">function</span> <span class="nx">request</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">request</span><span class="p">;</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">Request</span> <span class="o">=</span> <span class="nx">Request</span><span class="p">;</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">debug</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_DEBUG</span> <span class="o">&amp;&amp;</span>
+  <span class="sr">/request/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_DEBUG</span><span class="p">);</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">initParams</span> <span class="o">=</span> <span class="nx">initParams</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">requester</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">get</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">patch</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">patch</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">post</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">put</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">put</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">head</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">del</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">del</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">cookie</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">jar</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">jar</span>
+
+  <span class="k">return</span> <span class="nx">de</span>
+<span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="nx">request</span><span class="p">.</span><span class="nx">forever</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">agentOptions</span><span class="p">,</span> <span class="nx">optionsArg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>
+  <span class="k">return</span> <span class="nx">request</span><span class="p">.</span><span class="nx">defaults</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">put</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">patch</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">del</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">jar</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="nx">request</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">cookies</span> <span class="kr">from</span> <span class="s2">"./lib/cookies"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">copy</span> <span class="kr">from</span> <span class="s2">"./lib/copy"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Request</span> <span class="kr">from</span> <span class="s2">"./lib/request"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">util</span> <span class="kr">from</span> <span class="s2">"./lib/util"</span><span class="p">;</span>
+
+<span class="c1">// ...
+</span>
+
+<span class="kd">function</span> <span class="nx">request</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">request</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">Request</span> <span class="p">};</span>
+
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_DEBUG</span> <span class="o">&amp;&amp;</span>
+  <span class="sr">/request/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_DEBUG</span><span class="p">);</span>
+
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">initParams</span> <span class="o">=</span> <span class="nx">initParams</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">defaults</span> <span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">requester</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">get</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">get</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">patch</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">patch</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">post</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">post</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">put</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">put</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">head</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">head</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">del</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">del</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">def</span><span class="p">(</span><span class="nx">cookie</span><span class="p">)</span>
+  <span class="nx">de</span><span class="p">.</span><span class="nx">jar</span> <span class="o">=</span> <span class="nx">jar</span>
+
+  <span class="k">return</span> <span class="nx">de</span>
+<span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">forever</span> <span class="p">(</span><span class="nx">agentOptions</span><span class="p">,</span> <span class="nx">optionsArg</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>
+  <span class="k">return</span> <span class="nx">defaults</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">get</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">post</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">put</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">patch</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">head</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">del</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">jar</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">cookie</span> <span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+</code></pre>
+
+<p><a href="https://gist.github.com/wycats/4353447a213d3060e23f/revisions">full
+diff</a></p>
+
+<h2>json.js</h2>
+<pre><code class="highlight javascript"><span class="cm">/**
+ * Module dependencies
+ */</span>
+
+<span class="kd">var</span> <span class="nx">bytes</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bytes'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">read</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./read'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">typer</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'media-typer'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">typeis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'type-is'</span><span class="p">)</span>
+
+<span class="cm">/**
+ * Module exports
+ */</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">json</span>
+
+<span class="c1">// ...
+</span>
+<span class="kd">function</span> <span class="nx">json</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="cm">/**
+ * Module dependencies
+ */</span>
+
+<span class="kr">import</span> <span class="nx">bytes</span> <span class="kr">from</span> <span class="s2">"bytes"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">read</span> <span class="kr">from</span> <span class="s2">"./read"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">typer</span> <span class="kr">from</span> <span class="s2">"media-typer"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">typeis</span> <span class="kr">from</span> <span class="s2">"type-is"</span><span class="p">;</span>
+
+<span class="cm">/**
+ * Module exports
+ */</span>
+
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">json</span> <span class="p">};</span>
+
+<span class="c1">// ...
+</span>
+<span class="kd">function</span> <span class="nx">json</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre>
+
+<p><a href="https://gist.github.com/wycats/42dc6d94bcc57474cbef/revisions">full
+diff</a></p>
+
+<h2>mkdirp.js</h2>
+<pre><code class="highlight javascript"><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">mkdirP</span><span class="p">.</span><span class="nx">mkdirp</span> <span class="o">=</span> <span class="nx">mkdirP</span><span class="p">.</span><span class="nx">mkdirP</span> <span class="o">=</span> <span class="nx">mkdirP</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">mkdirP</span> <span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>  <span class="nx">p</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+  <span class="c1">// ...
+</span>  <span class="nx">mkdirP</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="nx">opts</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">er</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span>  <span class="p">})</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="nx">mkdirP</span><span class="p">.</span><span class="nx">sync</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">sync</span> <span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>  <span class="nx">p</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+  <span class="c1">// ...
+</span>  <span class="nx">made</span> <span class="o">=</span> <span class="nx">sync</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">made</span><span class="p">);</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+</code></pre>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">resolve</span><span class="p">,</span> <span class="nx">dirname</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"path"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">fs</span> <span class="kr">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+
+<span class="cm">/* aliases present in the original */</span>
+<span class="kr">export</span> <span class="p">{</span> <span class="nx">mkdirP</span> <span class="kr">as</span> <span class="nx">mkdirp</span><span class="p">,</span> <span class="nx">mkdirP</span> <span class="p">};</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">mkdirP</span> <span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">f</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>  <span class="nx">p</span> <span class="o">=</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+  <span class="c1">// ...
+</span>  <span class="nx">mkdirP</span><span class="p">(</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="nx">opts</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">er</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...
+</span>  <span class="p">})</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+
+<span class="c1">// ...
+</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">sync</span> <span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">made</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span>  <span class="nx">p</span> <span class="o">=</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>
+  <span class="c1">// ...
+</span>  <span class="nx">made</span> <span class="o">=</span> <span class="nx">sync</span><span class="p">(</span><span class="nx">dirname</span><span class="p">(</span><span class="nx">p</span><span class="p">),</span> <span class="nx">opts</span><span class="p">,</span> <span class="nx">made</span><span class="p">);</span>
+  <span class="c1">// ...
+</span><span class="p">}</span>
+</code></pre>
+
+<p><strong>Just as in CommonJS modules, you can decide whether to import the
+entire module into a single variable, or import individual names into
+local variables.</strong></p>
+
+<p><a href="https://gist.github.com/wycats/7d6f4b8c3ba7f594b67c/revisions">full
+diff</a></p>
+
+      </content>
+
+      <footer>
+        <a href="cjs.html">Compared to CommonJS</a>
+      </footer>
+    </main>
+
+  </body>
+</html>
