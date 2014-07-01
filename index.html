@@ -19,7 +19,8 @@
     </div>
 
     <main>
-      <p>The next version of JavaScript comes with a module system heavily
+      <content>
+        <p>The next version of JavaScript comes with a module system heavily
 inspired by Node.js modules.<br>Here&rsquo;s how it works.</p>
 
 <h1>Creating a Module</h1>
@@ -52,7 +53,7 @@ the <em>default export</em>. You export a default value from a module by using
 <h1>Importing a module</h1>
 
 <p>To import <code>asap</code> in another module, we use the import syntax:</p>
-<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span> <span class="kr">from</span> <span class="s2">"asap"</span><span class="p">;</span>
 
 <span class="nx">asap</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"hello async world!"</span><span class="p">);</span>
@@ -98,7 +99,7 @@ declaration.</p>
 <h1>Named imports</h1>
 
 <p>Now that we&rsquo;ve exported <code>later</code>, we can import it in another module.</p>
-<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"asap"</span><span class="p">;</span>
 
 <span class="nx">later</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Running after other network events"</span><span class="p">);</span>
@@ -107,7 +108,7 @@ declaration.</p>
 
 <p>For the curious, you can import both the default export and a number of
 named exports in the same <code>import</code>:</p>
-<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span><span class="p">,</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"asap"</span><span class="p">;</span>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="nx">asap</span><span class="p">,</span> <span class="p">{</span> <span class="nx">later</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"asap"</span><span class="p">;</span>
 </code></pre>
 
 <p>And that&rsquo;s all there is to it!</p>
@@ -118,7 +119,7 @@ named exports in the same <code>import</code>:</p>
 
 <p>Sometimes when importing a named export, you want to give it its own
 local name.</p>
-<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">unlink</span> <span class="nx">as</span> <span class="nx">rm</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">unlink</span> <span class="kr">as</span> <span class="nx">rm</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"fs"</span><span class="p">;</span>
 <span class="nx">rm</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* check errors */</span> <span class="p">});</span>
 </code></pre>
 
@@ -126,7 +127,7 @@ local name.</p>
 
 <p>It can be convenient to import all of a module&rsquo;s named exports into a
 single local namespace.</p>
-<pre><code class="highlight javascript"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">fs</span> <span class="nx">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+<pre><code class="highlight javascript"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">fs</span> <span class="kr">from</span> <span class="s2">"fs"</span><span class="p">;</span>
 
 <span class="nx">fs</span><span class="p">.</span><span class="nx">unlink</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* check errors */</span> <span class="p">});</span>
 </code></pre>
@@ -194,10 +195,10 @@ messages, but also makes it easier to build tools like browserify and
 JSHint that work reliably without caveats.</li>
 </ol>
 
+      </content>
 
       <footer>
-        <a href="cjs.html">Porting from CommonJS</a> |
-        <a href="amd.html">Porting from AMD</a>
+        <a href="cjs.html">Compared to CommonJS</a>
       </footer>
     </main>
 
