@@ -480,7 +480,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   .cjs main content p strong {
     display: block;
     font-weight: normal;
-    padding-bottom: 20px; }
+    padding-bottom: 10px; }
 
 /* line 9, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 html {
