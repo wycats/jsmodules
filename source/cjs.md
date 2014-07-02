@@ -259,7 +259,7 @@ import typeis from "type-is";
  * Module exports
  */
 
-export { json };
+export default json;
 
 // ...
 
@@ -267,11 +267,6 @@ function json(options) {
 
 }
 ```
-
-**Named exports can be placed anywhere in the file, including the top.
-This enables a style (used here) of declaring all
-imports and exports at the top of the file. This works regardless of how
-and when the variable is actually initialized.**
 
 [full
 diff](https://gist.github.com/wycats/42dc6d94bcc57474cbef/revisions)
