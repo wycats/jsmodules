@@ -1,7 +1,9 @@
 @import "colors";
 
 .cjs main content {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
 
   p {
