@@ -618,17 +618,25 @@ div.logo {
     margin-right: 30px;
     font-family: Lato;
     font-weight: bold;
-    font-size: 63px;
-    color: #2F2E2D;
-    color: #f9f7ec;
-    text-shadow: 0 0 5px #0a91b2; }
+    font-size: 63px; }
+    /* line 159, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+    div.logo p a {
+      color: #2F2E2D;
+      color: #f9f7ec;
+      text-shadow: 0 0 5px #0a91b2;
+      text-decoration: none; }
 
-/* line 164, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 168, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+#footnote-1 {
+  display: block;
+  font-size: 90%; }
+
+/* line 173, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 img.logo {
   align-self: center;
   margin-bottom: 10px; }
 
-/* line 169, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 178, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 pre {
   background: #eeecdd;
   padding: 10px;
@@ -637,22 +645,22 @@ pre {
   border-radius: 4px;
   line-height: 120%; }
 
-/* line 178, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 187, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 footer {
   margin-top: 10px;
   border-top: 1px solid #b25600;
   padding-top: 10px;
   width: 100%;
   text-align: center; }
-  /* line 185, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 194, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   footer a {
     color: #b25600;
     text-decoration: none; }
-    /* line 189, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+    /* line 198, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
     footer a:hover {
       text-decoration: underline; }
 
-/* line 195, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 204, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 .headerlink {
   display: none;
   text-decoration: none; }
