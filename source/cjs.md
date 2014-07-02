@@ -68,9 +68,17 @@ var cookies = require('./lib/cookies')
   , util = require('util')
   ;
 
+function initParams(uri, options, callback) {
+  // ...
+  opts = util._extend({}, options);
+  // ...
+}
+
 // ...
 
 function request (uri, options, callback) {
+  // ...
+  opts = util._extend({}, options);
   // ...
 }
 
@@ -143,12 +151,20 @@ request.cookie = function (uri, options, callback) {
 import cookies from "./lib/cookies";
 import copy from "./lib/copy";
 import Request from "./lib/request";
-import util from "./lib/util";
+import { _extend } from "./lib/util";
+
+
+function initParams(uri, options, callback) {
+  // ...
+  opts = _extend({}, options);
+  // ...
+}
 
 // ...
 
-
 function request (uri, options, callback) {
+  // ...
+  opts = _extend({}, options);
   // ...
 }
 
