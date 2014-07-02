@@ -1,0 +1,63 @@
+@import "colors";
+
+.cjs main content {
+  display: flex;
+  flex-flow: row wrap;
+
+  p {
+    margin: 0;
+  }
+
+  p:first-child {
+    width: 93%;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    margin-right: 1%;
+    width: 49%;
+    border-bottom: 1px solid $secondary;
+  }
+
+  h1 + h1 {
+    margin-right: 0;
+    margin-left: 1%;
+  }
+
+  h2 {
+    color: $tertiary;
+    font-family: Consolas;
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 20px;
+  }
+
+  a {
+    color: $light-main;
+  }
+
+  pre {
+    font-size: 13px;
+    width: 49%;
+  }
+
+  pre:nth-of-type(odd) {
+    margin-right: 1%;
+  }
+
+  pre:nth-of-type(even) {
+    margin-left: 1%;
+  }
+
+  .c1 {
+    color: #ccc;
+  }
+
+  p strong {
+    display: block;
+    font-weight: normal;
+    padding-bottom: 10px;
+  }
+}

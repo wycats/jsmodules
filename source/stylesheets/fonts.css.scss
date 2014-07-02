@@ -1,0 +1,9 @@
+@import "compass/css3";
+
+@include font-face("Consolas", inline-font-files("Consolas.woff", woff), $weight: 400);
+@include font-face("Consolas", inline-font-files("Consolas-Bold.woff", woff), $weight: 700);
+@include font-face("Roboto", inline-font-files("Roboto/Roboto-Regular.woff", woff), $weight: 400);
+@include font-face("Roboto", inline-font-files("Roboto/Roboto-Bold.woff", woff), $weight: 700);
+@include font-face("Roboto", inline-font-files("Roboto/Roboto-Medium.woff", woff), $weight: 500);
+@include font-face("Lato", inline-font-files("Lato/Lato-Bold.woff", woff), $weight: 400);
+
