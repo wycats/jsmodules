@@ -151,7 +151,7 @@ request.cookie = function (uri, options, callback) {
 import cookies from "./lib/cookies";
 import copy from "./lib/copy";
 import Request from "./lib/request";
-import { _extend } from "./lib/util";
+import { _extend } from "util";
 
 
 function initParams(uri, options, callback) {
