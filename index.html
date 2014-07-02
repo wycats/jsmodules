@@ -29,7 +29,7 @@ inspired by Node.js modules.<br>Here&rsquo;s how it works.</p>
 work to happen as soon as possible, but asynchronously. In Node.js, you
 can do this via <code>process.nextTick</code>, but there are different approaches
 that work in various browsers. We&rsquo;re going to build a module that works
-everywhere.</p>
+everywhere<a href="#footnote-1"><sup>1</sup></a>.</p>
 
 <p>We start by creating a new file for this module. We&rsquo;ll call it <code>asap.js</code>.
 The module provides a single primary function, which JavaScript calls
@@ -120,6 +120,7 @@ named exports in the same <code>import</code>:</p>
 <p>Sometimes when importing a named export, you want to give it its own
 local name.</p>
 <pre><code class="highlight javascript"><span class="kr">import</span> <span class="p">{</span> <span class="nx">unlink</span> <span class="kr">as</span> <span class="nx">rm</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">"fs"</span><span class="p">;</span>
+
 <span class="nx">rm</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* check errors */</span> <span class="p">});</span>
 </code></pre>
 
@@ -194,6 +195,9 @@ importing by just looking at the syntax. That improves error
 messages, but also makes it easier to build tools like browserify and
 JSHint that work reliably without caveats.</li>
 </ol>
+
+<p><span id="footnote-1"><sup>1</sup></span> A production-quality version of this library would be more
+detailed, but this will do for our purposes. </p>
 
       </content>
 

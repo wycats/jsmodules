@@ -491,63 +491,73 @@ html {
   background: url("../images/noise.png"), radial-gradient(top center, circle, #37d7ff 0%, #0a91b2 1000px); }
 
 /* line 14, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+sup {
+  font-size: 50%;
+  vertical-align: super; }
+
+/* line 19, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 pre {
   font-family: "Consolas"; }
 
-/* line 18, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 23, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 body {
   font-family: "Roboto"; }
 
-/* line 22, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 27, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 * {
   box-sizing: border-box; }
 
-/* line 26, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 31, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 body {
   display: flex;
   flex-direction: column;
   align-items: center; }
 
-/* line 32, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
-a {
+/* line 37, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+a, sup {
   color: #ff891d; }
-  /* line 35, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
-  a:hover {
-    color: #b25600; }
 
-/* line 40, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 41, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+sup {
+  font-weight: bold; }
+
+/* line 45, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+a:hover {
+  color: #b25600; }
+
+/* line 49, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 h1 {
   font-size: 24px;
   margin: 20px 0 10px 0;
   font-weight: bold;
   color: #b25600; }
-  /* line 46, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 55, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   h1 code:not(.highlight) {
     color: #ff891d; }
-  /* line 51, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 60, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   h1:hover .headerlink {
     display: inline-block; }
 
-/* line 57, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 66, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 h1:first-child {
   margin-top: 0; }
 
-/* line 61, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 70, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 h2 {
   font-size: 18px;
   margin: 15px 0 5px 0;
   color: #b25600;
   font-weight: bold; }
-  /* line 67, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 76, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   h2 code:not(.highlight) {
     color: #ff891d; }
 
-/* line 72, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 81, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 code:not(.highlight) {
   font-family: Consolas;
   color: #b25600; }
 
-/* line 77, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 86, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 main {
   background: url("../images/js-logo.png") no-repeat;
   background-size: 50px 50px;
@@ -560,7 +570,7 @@ main {
   padding: 15px;
   border-radius: 5px 0 5px 5px;
   box-shadow: 0px 0px 5px 2px #0a91b2; }
-  /* line 93, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 102, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   main p:first-child {
     color: #0a91b2;
     font-weight: 500;
@@ -568,40 +578,40 @@ main {
     padding-right: 100px;
     padding-bottom: 15px;
     border-bottom: 1px solid #1dd2ff; }
-    /* line 101, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+    /* line 110, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
     main p:first-child a {
       color: #0a91b2; }
-      /* line 104, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+      /* line 113, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
       main p:first-child a:hover {
         color: #1dd2ff; }
-  /* line 110, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 119, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   main p, main ul, main ol {
     color: #0a91b2;
     margin: 10px 0;
     line-height: 150%; }
-  /* line 116, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 125, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   main ul, main ol {
     margin-left: 20px; }
-  /* line 120, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 129, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   main li {
     list-style-type: disc;
     margin-bottom: 0.7em; }
-  /* line 125, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 134, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   main strong {
     font-weight: bold; }
 
-/* line 130, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 139, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 div.logo {
   display: flex;
   border-radius: 5px;
   margin-top: 20px;
   margin-bottom: 27px; }
-  /* line 136, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 145, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   div.logo img {
     margin-left: 10px;
     width: 100px;
     height: 100px; }
-  /* line 142, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 151, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   div.logo p {
     align-self: flex-end;
     margin-left: 10px;
@@ -613,12 +623,12 @@ div.logo {
     color: #f9f7ec;
     text-shadow: 0 0 5px #0a91b2; }
 
-/* line 155, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 164, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 img.logo {
   align-self: center;
   margin-bottom: 10px; }
 
-/* line 160, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 169, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 pre {
   background: #eeecdd;
   padding: 10px;
@@ -627,22 +637,22 @@ pre {
   border-radius: 4px;
   line-height: 120%; }
 
-/* line 169, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 178, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 footer {
   margin-top: 10px;
   border-top: 1px solid #b25600;
   padding-top: 10px;
   width: 100%;
   text-align: center; }
-  /* line 176, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+  /* line 185, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
   footer a {
     color: #b25600;
     text-decoration: none; }
-    /* line 180, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+    /* line 189, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
     footer a:hover {
       text-decoration: underline; }
 
-/* line 186, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
+/* line 195, /home/wycats/Code/modules-website/source/stylesheets/all.css.scss */
 .headerlink {
   display: none;
   text-decoration: none; }
